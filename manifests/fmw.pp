@@ -667,7 +667,7 @@ define orawls::fmw(
       $command = "-silent -response ${download_dir}/${sanitised_title}_silent.rsp -waitforcompletion"
     }
 
-    if $version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version == '1221' {
+    if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') >= 0 {
       if $type == 'java' {
         $install = "java -Djava.io.tmpdir=${temp_directory} -jar "
       }
