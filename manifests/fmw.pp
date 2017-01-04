@@ -91,7 +91,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'forms' ) {
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $fmw_silent_response_file = 'orawls/fmw_silent_forms_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_fr_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -119,13 +119,13 @@ define orawls::fmw(
 
       $createFile1 = "${download_dir}/${sanitised_title}/Disk1"
 
-      if versioncmp($version, '11112') == 0 {
+      if versioncmp($version, '11112') == 0
         $total_files = 4
         $createFile2 = "${download_dir}/${sanitised_title}/Disk2"
         $createFile3 = "${download_dir}/${sanitised_title}/Disk3"
         $createFile4 = "${download_dir}/${sanitised_title}/Disk4"
       }
-      elsif versioncmp($version, '1112') == 0  {
+      elsif versioncmp($version, '1112') == 0
         $total_files = 2
         $createFile2 = "${download_dir}/${sanitised_title}/Disk4"
       }
@@ -145,7 +145,7 @@ define orawls::fmw(
 
     $fmw_silent_configure_file = false
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_soa.jar'
@@ -158,7 +158,7 @@ define orawls::fmw(
         $install_type = 'SOA Suite'
       }
     }
-    elsif versioncmp($version, '1213') == 0 {
+    elsif versioncmp($version, '1213') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_soa.jar'
@@ -186,7 +186,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'soaqs' ) {
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $total_files = 2
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_soa_quickstart.jar'
@@ -201,7 +201,7 @@ define orawls::fmw(
         $install_type = 'SOA Suite'
       }
     }
-    elsif versioncmp($version, '1213') == 0 {
+    elsif versioncmp($version, '1213') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_soa_quickstart.jar'
@@ -222,14 +222,14 @@ define orawls::fmw(
     $fmw_silent_configure_file = false
 
     $total_files = 1
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $fmw_silent_response_file = 'orawls/fmw_silent_osb_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_osb.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $oracleHome               = "${middleware_home_dir}/osb/bin"
       $type                     = 'java'
     }
-    elsif versioncmp($version, '1213') == 0 {
+    elsif versioncmp($version, '1213') == 0
       $fmw_silent_response_file = 'orawls/fmw_silent_osb_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_osb.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -258,7 +258,7 @@ define orawls::fmw(
       $install_type = 'B2B'
     }
 
-    if versioncmp($version, '1213') == 0 {
+    if versioncmp($version, '1213') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_b2b_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_b2bhealthcare.jar'
@@ -266,7 +266,7 @@ define orawls::fmw(
       $oracleHome               = "${middleware_home_dir}/soa/soa/modules/oracle.soa.b2b_11.1.1/b2b.jar"
       $type                     = 'java'
     }
-    elsif versioncmp($version, '1221') == 0 {
+    elsif versioncmp($version, '1221') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_b2b_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_b2bhealthcare.jar'
@@ -281,7 +281,7 @@ define orawls::fmw(
 
     $fmw_silent_configure_file = false
 
-    if versioncmp($version, '1213') == 0 {
+    if versioncmp($version, '1213') == 0
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_mft_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_mft.jar'
@@ -311,7 +311,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'wc' ) {
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $fmw_silent_response_file = 'orawls/fmw_silent_wc_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_wcportal_generic.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -334,7 +334,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'wcc' ) {
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $fmw_silent_response_file = 'orawls/fmw_silent_wcc_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_wccontent_generic.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -360,7 +360,7 @@ define orawls::fmw(
     if ($ohs_mode == 'standalone') {
       $install_type = 'Standalone HTTP Server (Managed independently of WebLogic server)'
     } elsif ($ohs_mode in ['colocated','collocated']) {
-      if versioncmp($version, '1212') == 0 {
+      if versioncmp($version, '1212') == 0
         $install_type = 'Colocated HTTP Server (Managed through WebLogic server)'
       } else {
         $install_type = 'Collocated HTTP Server (Managed through WebLogic server)'
@@ -369,19 +369,19 @@ define orawls::fmw(
       fail("Unrecognized parameter ohs_mode: ${ohs_mode}, please use colocated|collocated|standalone")
     }
 
-    if versioncmp($version, '1212') == 0 {
+    if versioncmp($version, '1212') == 0
       $fmw_silent_response_file = 'orawls/web_http_server_1212.rsp.erb'
       $binFile1                 = 'ohs_121200_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $type                     = 'bin'
     }
-    elsif versioncmp($version, '1213') == 0 {
+    elsif versioncmp($version, '1213') == 0
       $fmw_silent_response_file = 'orawls/web_http_server_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_ohs_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $type                     = 'bin'
     }
-    elsif versioncmp($version, '1221') == 0 {
+    elsif versioncmp($version, '1221') == 0
       $fmw_silent_response_file = 'orawls/web_http_server_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_ohs_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -435,7 +435,7 @@ define orawls::fmw(
   }
 
   # check if the oracle home already exists, only for < 12.1.2, this is for performance reasons
-  if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 {
+  if $version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp(versioncmp($version, '1221') == 0
     $continue = true
   } else {
     $found = orawls_oracle_exists($oracleHome)
@@ -660,14 +660,14 @@ define orawls::fmw(
       }
     }
 
-    if versioncmp($version, '1221') == 0 {
+    if versioncmp($version, '1221') == 0
       $command = "-silent -responseFile ${download_dir}/${sanitised_title}_silent.rsp"
     }
     else {
       $command = "-silent -response ${download_dir}/${sanitised_title}_silent.rsp -waitforcompletion"
     }
 
-    if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 {
+    if $version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp(versioncmp($version, '1221') == 0
       if $type == 'java' {
         $install = "java -Djava.io.tmpdir=${temp_directory} -jar "
       }
