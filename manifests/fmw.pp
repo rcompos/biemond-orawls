@@ -81,10 +81,11 @@ define orawls::fmw(
   $sanitised_title = regsubst ($convert_spaces_to_underscores,'[^a-zA-Z0-9_.-]','','G')
 
   if ( $fmw_product == 'adf' ) {
+    $binFile1                 = ''
     $fmw_silent_response_file = 'orawls/fmw_silent_adf.rsp.erb'
 
     $fmw_silent_configure_file = false
-    
+
     if ($oracle_home_dir == undef) {
       $oracleHome = "${middleware_home_dir}/oracle_common"
     }
