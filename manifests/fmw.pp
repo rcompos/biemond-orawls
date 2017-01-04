@@ -32,6 +32,8 @@ define orawls::fmw(
   $oracle_domain_name     = undef,
 )
 {
+  $version_string = sprintf('%d', $version)
+
   $exec_path    = "${jdk_home_dir}/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:"
 
   # Set basic umask for execs
@@ -393,7 +395,7 @@ define orawls::fmw(
     }
 
     if ($oracle_home_dir == undef) {
-      if ( versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 ) {
+      if ( versioncmp($version_string, '1212') == 0 or versioncmp($version_string, '1213') == 0 or versioncmp($version_string, '1221') == 0 ) {
         $oracleHome = "${middleware_home_dir}/ohs"
       } else {
         $oracleHome = "${middleware_home_dir}/Oracle_WT1"
@@ -435,7 +437,7 @@ define orawls::fmw(
   }
 
   # check if the oracle home already exists, only for < 12.1.2, this is for performance reasons
-  if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') >= 0 {
+  if versioncmp($version_string, '1212') == 0 or versioncmp($version_string, '1213') == 0 or versioncmp($version_string, '1221') >= 0 {
     $continue = true
   } else {
     $found = orawls_oracle_exists($oracleHome)
@@ -630,7 +632,7 @@ define orawls::fmw(
     }
 
     if $::kernel == 'SunOS' {
-      if versioncmp($version, '1213') != 0 {
+      if versioncmp($version_string, '1213') != 0 {
         if $fmw_product == 'soa' {
           exec { "add -d64 oraparam.ini ${sanitised_title}":
             command   => "sed -e's/JRE_MEMORY_OPTIONS=\" -Xverify:none\"/JRE_MEMORY_OPTIONS=\"-d64 -Xverify:none\"/g' ${download_dir}/${sanitised_title}/Disk1/install/${installDir}/oraparam.ini > ${temp_directory}/soa.tmp && mv ${temp_directory}/soa.tmp ${download_dir}/${sanitised_title}/Disk1/install/${installDir}/oraparam.ini",
@@ -667,7 +669,7 @@ define orawls::fmw(
       $command = "-silent -response ${download_dir}/${sanitised_title}_silent.rsp -waitforcompletion"
     }
 
-    if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') >= 0 {
+    if versioncmp($version_string, '1212') == 0 or versioncmp($version_string, '1213') == 0 or versioncmp($version_string, '1221') >= 0 {
       if $type == 'java' {
         $install = "java -Djava.io.tmpdir=${temp_directory} -jar "
       }
@@ -738,7 +740,7 @@ define orawls::fmw(
       }
 
       ## fix EditHttpConf in OHS Webgate
-      if ( versioncmp($version, '1112') == 0 and $fmw_product == 'webgate' ) {
+      if ( versioncmp($version_string, '1112') == 0 and $fmw_product == 'webgate' ) {
         exec { "install ${sanitised_title} EditHttpConf1":
           command   => "unzip -o -j '${download_dir}/${sanitised_title}/Disk1/stage/Components/oracle.as.oam.webgate.ohs_linux64/11.1.2.2.0/1/DataFiles/filegroup1.jar' 'webgate/ohs/lib/libxmlengine.so' -d '${oracleHome}/webgate/ohs/lib/'",
           timeout   => 0,
