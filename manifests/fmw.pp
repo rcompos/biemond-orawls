@@ -435,7 +435,7 @@ define orawls::fmw(
   }
 
   # check if the oracle home already exists, only for < 12.1.2, this is for performance reasons
-  if $version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version == '1221' {
+  if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') >= 0 {
     $continue = true
   } else {
     $found = orawls_oracle_exists($oracleHome)
