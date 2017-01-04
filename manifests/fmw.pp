@@ -91,7 +91,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'forms' ) {
 
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $fmw_silent_response_file = 'orawls/fmw_silent_forms_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_fr_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -99,6 +99,8 @@ define orawls::fmw(
       $total_files              = 1
       $install_type             = 'Forms and Reports Deployment'
       $oracleHome               = "${middleware_home_dir}/forms"
+
+      $fmw_silent_configure_file = false
     }
     else {
       $fmw_silent_response_file  = 'orawls/fr_ins_only.rsp.erb'
@@ -117,13 +119,13 @@ define orawls::fmw(
 
       $createFile1 = "${download_dir}/${sanitised_title}/Disk1"
 
-      if $version == 11112 {
+      if versioncmp($version, '11112') == 0 {
         $total_files = 4
         $createFile2 = "${download_dir}/${sanitised_title}/Disk2"
         $createFile3 = "${download_dir}/${sanitised_title}/Disk3"
         $createFile4 = "${download_dir}/${sanitised_title}/Disk4"
       }
-      elsif $version == 1112  {
+      elsif versioncmp($version, '1112') == 0  {
         $total_files = 2
         $createFile2 = "${download_dir}/${sanitised_title}/Disk4"
       }
@@ -141,7 +143,9 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'soa' ) {
 
-    if $version == 1221 {
+    $fmw_silent_configure_file = false
+
+    if versioncmp($version, '1221') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_soa.jar'
@@ -154,7 +158,7 @@ define orawls::fmw(
         $install_type = 'SOA Suite'
       }
     }
-    elsif $version == 1213 {
+    elsif versioncmp($version, '1213') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_soa.jar'
@@ -182,7 +186,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'soaqs' ) {
 
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $total_files = 2
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_soa_quickstart.jar'
@@ -197,7 +201,7 @@ define orawls::fmw(
         $install_type = 'SOA Suite'
       }
     }
-    elsif $version == 1213 {
+    elsif versioncmp($version, '1213') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_soa_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_soa_quickstart.jar'
@@ -215,16 +219,17 @@ define orawls::fmw(
     }
 
   } elsif ( $fmw_product == 'osb' ) {
+    $fmw_silent_configure_file = false
 
     $total_files = 1
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $fmw_silent_response_file = 'orawls/fmw_silent_osb_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_osb.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $oracleHome               = "${middleware_home_dir}/osb/bin"
       $type                     = 'java'
     }
-    elsif $version == 1213 {
+    elsif versioncmp($version, '1213') == 0 {
       $fmw_silent_response_file = 'orawls/fmw_silent_osb_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_osb.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -232,6 +237,8 @@ define orawls::fmw(
       $type                     = 'java'
     }
     else {
+      $fmw_silent_configure_file = false
+
       $fmw_silent_response_file = 'orawls/fmw_silent_osb.rsp.erb'
       $createFile1 = "${download_dir}/${sanitised_title}/Disk1"
       if ($oracle_home_dir == undef) {
@@ -243,13 +250,15 @@ define orawls::fmw(
     }
   }
   elsif ( $fmw_product == 'b2b' ) {
+    $fmw_silent_configure_file = false
+
     if $healthcare == true {
       $install_type = 'Healthcare'
     } else {
       $install_type = 'B2B'
     }
 
-    if $version == 1213 {
+    if versioncmp($version, '1213') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_b2b_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_b2bhealthcare.jar'
@@ -257,7 +266,7 @@ define orawls::fmw(
       $oracleHome               = "${middleware_home_dir}/soa/soa/modules/oracle.soa.b2b_11.1.1/b2b.jar"
       $type                     = 'java'
     }
-    elsif $version == 1221 {
+    elsif versioncmp($version, '1221') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_b2b_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_b2bhealthcare.jar'
@@ -270,7 +279,9 @@ define orawls::fmw(
     }
   } elsif ( $fmw_product == 'mft' ) {
 
-    if $version == 1213 {
+    $fmw_silent_configure_file = false
+
+    if versioncmp($version, '1213') == 0 {
       $total_files = 1
       $fmw_silent_response_file = 'orawls/fmw_silent_mft_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_mft.jar'
@@ -283,6 +294,8 @@ define orawls::fmw(
     }
 
   } elsif ( ( $fmw_product == 'oim' ) or ( $fmw_product == 'oam' ) ) {
+
+    $fmw_silent_configure_file = false
 
     $fmw_silent_response_file = 'orawls/fmw_silent_oim.rsp.erb'
     if ($oracle_home_dir == undef) {
@@ -298,7 +311,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'wc' ) {
 
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $fmw_silent_response_file = 'orawls/fmw_silent_wc_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_wcportal_generic.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -321,7 +334,7 @@ define orawls::fmw(
 
   } elsif ( $fmw_product == 'wcc' ) {
 
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $fmw_silent_response_file = 'orawls/fmw_silent_wcc_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_wccontent_generic.jar'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -347,7 +360,7 @@ define orawls::fmw(
     if ($ohs_mode == 'standalone') {
       $install_type = 'Standalone HTTP Server (Managed independently of WebLogic server)'
     } elsif ($ohs_mode in ['colocated','collocated']) {
-      if $version == 1212 {
+      if versioncmp($version, '1212') == 0 {
         $install_type = 'Colocated HTTP Server (Managed through WebLogic server)'
       } else {
         $install_type = 'Collocated HTTP Server (Managed through WebLogic server)'
@@ -356,19 +369,19 @@ define orawls::fmw(
       fail("Unrecognized parameter ohs_mode: ${ohs_mode}, please use colocated|collocated|standalone")
     }
 
-    if $version == 1212 {
+    if versioncmp($version, '1212') == 0 {
       $fmw_silent_response_file = 'orawls/web_http_server_1212.rsp.erb'
       $binFile1                 = 'ohs_121200_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $type                     = 'bin'
     }
-    elsif $version == 1213 {
+    elsif versioncmp($version, '1213') == 0 {
       $fmw_silent_response_file = 'orawls/web_http_server_1213.rsp.erb'
       $binFile1                 = 'fmw_12.1.3.0.0_ohs_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
       $type                     = 'bin'
     }
-    elsif $version == 1221 {
+    elsif versioncmp($version, '1221') == 0 {
       $fmw_silent_response_file = 'orawls/web_http_server_1221.rsp.erb'
       $binFile1                 = 'fmw_12.2.1.0.0_ohs_linux64.bin'
       $createFile1              = "${download_dir}/${sanitised_title}/${binFile1}"
@@ -380,7 +393,7 @@ define orawls::fmw(
     }
 
     if ($oracle_home_dir == undef) {
-      if ( $version == 1212 or $version == 1213 or $version == 1221 ) {
+      if ( versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 ) {
         $oracleHome = "${middleware_home_dir}/ohs"
       } else {
         $oracleHome = "${middleware_home_dir}/Oracle_WT1"
@@ -422,7 +435,7 @@ define orawls::fmw(
   }
 
   # check if the oracle home already exists, only for < 12.1.2, this is for performance reasons
-  if $version == 1212 or $version == 1213 or $version == 1221 {
+  if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 {
     $continue = true
   } else {
     $found = orawls_oracle_exists($oracleHome)
@@ -617,7 +630,7 @@ define orawls::fmw(
     }
 
     if $::kernel == 'SunOS' {
-      if $version != 1213 {
+      if versioncmp($version, '1213') != 0 {
         if $fmw_product == 'soa' {
           exec { "add -d64 oraparam.ini ${sanitised_title}":
             command   => "sed -e's/JRE_MEMORY_OPTIONS=\" -Xverify:none\"/JRE_MEMORY_OPTIONS=\"-d64 -Xverify:none\"/g' ${download_dir}/${sanitised_title}/Disk1/install/${installDir}/oraparam.ini > ${temp_directory}/soa.tmp && mv ${temp_directory}/soa.tmp ${download_dir}/${sanitised_title}/Disk1/install/${installDir}/oraparam.ini",
@@ -647,14 +660,14 @@ define orawls::fmw(
       }
     }
 
-    if $version == 1221 {
+    if versioncmp($version, '1221') == 0 {
       $command = "-silent -responseFile ${download_dir}/${sanitised_title}_silent.rsp"
     }
     else {
       $command = "-silent -response ${download_dir}/${sanitised_title}_silent.rsp -waitforcompletion"
     }
 
-    if $version == 1212 or $version == 1213 or $version == 1221 {
+    if versioncmp($version, '1212') == 0 or versioncmp($version, '1213') == 0 or versioncmp($version, '1221') == 0 {
       if $type == 'java' {
         $install = "java -Djava.io.tmpdir=${temp_directory} -jar "
       }
@@ -725,7 +738,7 @@ define orawls::fmw(
       }
 
       ## fix EditHttpConf in OHS Webgate
-      if ( $version == 1112 and $fmw_product == 'webgate' ) {
+      if ( versioncmp($version, '1112') == 0 and $fmw_product == 'webgate' ) {
         exec { "install ${sanitised_title} EditHttpConf1":
           command   => "unzip -o -j '${download_dir}/${sanitised_title}/Disk1/stage/Components/oracle.as.oam.webgate.ohs_linux64/11.1.2.2.0/1/DataFiles/filegroup1.jar' 'webgate/ohs/lib/libxmlengine.so' -d '${oracleHome}/webgate/ohs/lib/'",
           timeout   => 0,
